@@ -57,16 +57,13 @@ public class PacienteRepositoryImpl implements IPacienteRepository {
 	}
 
 	@Override
-	public void reporte(LocalDateTime fecha, String genero) {
+	public List<PacienteSencillo> reporte(LocalDateTime fecha, String genero) {
 		// TODO Auto-generated method stub
 		TypedQuery<PacienteSencillo> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.demo.modelo.PacienteSencillo(p.cedula, p.nombre, p.fechaNacimiento, p.genero) "
-				+ "FROM Paciente p JOIN p.citaMedicas WHERE p.fechaNacimiento > :datoFecha AND p.genero = :datoGenero", PacienteSencillo.class);
+				+ "FROM Paciente p WHERE p.fechaNacimiento > :datoFecha AND p.genero = :datoGenero", PacienteSencillo.class);
 		myQuery.setParameter("datoFecha", fecha);
 		myQuery.setParameter("datoGenero", genero);
-		List<PacienteSencillo> reportePacientes = myQuery.getResultList();
-		for(PacienteSencillo item:reportePacientes) {
-			LOG.info(item.toString());
-		}
+		return myQuery.getResultList();
 	}
 
 }

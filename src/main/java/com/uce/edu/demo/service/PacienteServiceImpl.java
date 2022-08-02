@@ -1,6 +1,7 @@
 package com.uce.edu.demo.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.modelo.Paciente;
+import com.uce.edu.demo.modelo.PacienteSencillo;
 import com.uce.edu.demo.repository.IPacienteRepository;
 
 @Service
@@ -50,9 +52,9 @@ public class PacienteServiceImpl implements IPacienteService {
 	}
 
 	@Override
-	public void reporte(LocalDateTime fecha, String genero) {
+	public List<PacienteSencillo> reporte(LocalDateTime fecha, String genero) {
 		// TODO Auto-generated method stub
-		this.pacienteRepository.reporte(fecha, genero);
+		return this.pacienteRepository.reporte(fecha, genero);
 	}
 
 }
